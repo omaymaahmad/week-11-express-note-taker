@@ -28,13 +28,25 @@ router.post("/api/notes", (req, res) => {
         if (err) throw (err);
     });
 
-    res.json(myNotes);
+    res.json(data);
 });
    
 
 //add a delete request to it
-router.delete("/api/notes", (req, res) => {
-  let noteId = req.params;
+router.delete("/api/notes/:id", (req, res) => {
+  let noteId = req.params.id;
+  let newId = 0;
+  console.log('deleting note ${noteId}');
+  data = data.filter(currentNote => {
+      return currentNote.id != noteId;
+  });
+  for (currentNote of data) {
+      currentNote.id = newId.toString();
+      newId++;
+  }
+  fs.writeFileSync('./db/db.json', JSON.stringify(data));
+  res.json(data);
+
 });
 //export the router
 module.exports = router;
