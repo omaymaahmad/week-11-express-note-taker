@@ -1,20 +1,19 @@
-//create a router
+//dependencies 
 const express = require("express");
 const databaseFunctions = require("../db/database");
 const router = express.Router();
 
-const fs = require("fs");
 
-//add a get request to it
+//get request
 router.get("/notes", (req, res) => {
   databaseFunctions.getNotes().then((myNotes) => {
     res.json(myNotes);
   });
 
 
-  // Should read the `db.json` file and return all saved notes as JSON
+
 });
-//add a post request to it
+//post request
 router.post("/notes", (req, res) => {
   databaseFunctions.addNote(req.body).then(() => {
     res.sendStatus(200)
@@ -22,7 +21,7 @@ router.post("/notes", (req, res) => {
 });
    
 
-//add a delete request to it
+//delete request
 router.delete("/notes/:id", (req, res) => {
   let noteId = req.params.id;
   databaseFunctions.deleteNote(req.params.id).then(() => {

@@ -5,7 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 const promisifyReadFile = util.promisify(fs.readFile);
 const promisifyWriteFile = util.promisify(fs.writeFile);
 
-
+// create class
 class databaseFunctionality {
 
     read() {
@@ -15,7 +15,7 @@ class databaseFunctionality {
     write(myNotes) {
         return promisifyWriteFile("db/db.json", JSON.stringify(myNotes));
     }
-
+// get notes 
     getNotes(){
         return this.read().then((myNotes) => {
         
