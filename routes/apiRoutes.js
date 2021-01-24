@@ -17,7 +17,19 @@ router.get("/api/notes", (req, res) => {
   // Should read the `db.json` file and return all saved notes as JSON
 });
 //add a post request to it
-router.post("/api/notes", (req, res) => {});
+router.post("/api/notes", (req, res) => {
+    let newNote = req.body;
+    let noteId = (data.length).toString();
+    console.log(noteId);
+    newNote.id = noteId;
+    data.push(newNote);
+
+    fs.writeFileSync('./db/db.json', JSON.stringify(data), function(err) {
+        if (err) throw (err);
+    });
+
+    res.json(myNotes);
+});
    
 
 //add a delete request to it
