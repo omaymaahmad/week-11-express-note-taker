@@ -1,5 +1,6 @@
 const fs = require("fs")
 const util = require("util"); 
+const { v4: uuidv4 } = require('uuid');
 
 const promisifyReadFile = util.promisify(fs.readFile);
 const promisifyWriteFile = util.promisify(fs.writeFile);
@@ -17,21 +18,17 @@ class databaseFunctionality {
 
     getNotes(){
         return this.read().then((myNotes) => {
-           
+        
             let jsonNotes = [].concat(JSON.parse(myNotes))
             return jsonNotes;
         })
     }
 
 
-    addNote(myNotes){
-       const { title, text } = myNotes;
-       
-       if (!title || !text) {
-           throw new Error("the 'title and 'text' cannot be blank");
-       }
+    addNote(myNewNote){
+       const { title, text } = myNewNote;
 
-       const newNote = { title, text, id: util() };
+       const newNote = { title, text, id: uuidv4()  };
 
        return this.getNotes()
        .then((myNotes) => [...myNotes, newNote])

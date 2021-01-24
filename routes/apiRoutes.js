@@ -16,18 +16,11 @@ router.get("/notes", (req, res) => {
 });
 //add a post request to it
 router.post("/notes", (req, res) => {
-  console.log("post request called")
-    let newNote = req.body;
-    let noteId = (data.length).toString();
-    console.log(noteId);
-    newNote.id = noteId;
-    data.push(newNote);
-
-    fs.writeFileSync('./db/db.json', JSON.stringify(data), function(err) {
-        if (err) throw (err);
-    });
-
-    res.json(data);
+  databaseFunctions.addNote(req.body).then(() => {
+    res.sendStatus(200)
+  })
+    
+  
 });
    
 
