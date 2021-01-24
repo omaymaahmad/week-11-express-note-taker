@@ -19,25 +19,16 @@ router.post("/notes", (req, res) => {
   databaseFunctions.addNote(req.body).then(() => {
     res.sendStatus(200)
   })
-    
-  
 });
    
 
 //add a delete request to it
 router.delete("/notes/:id", (req, res) => {
   let noteId = req.params.id;
-  let newId = 0;
-  console.log('deleting note ${noteId}');
-  data = data.filter(currentNote => {
-      return currentNote.id != noteId;
-  });
-  for (currentNote of data) {
-      currentNote.id = newId.toString();
-      newId++;
-  }
-  fs.writeFileSync('./db/db.json', JSON.stringify(data));
-  res.json(data);
+  databaseFunctions.deleteNote(req.params.id).then(() => {
+    res.sendStatus(200)
+  })
+
 
 });
 //export the router

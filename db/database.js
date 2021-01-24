@@ -37,7 +37,13 @@ class databaseFunctionality {
     }
 
 
-    deleteNote(){}
+    deleteNote(idOnNoteToDelete){
+        return this.getNotes()
+        .then((myNotes) => myNotes.filter((currentNote) => currentNote.id !== idOnNoteToDelete))
+        .then((updatedNotes) => this.write(updatedNotes))
+                 
+        
+    }
 }
 
 module.exports = new databaseFunctionality();
