@@ -9,8 +9,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(express.static("public"))
 
+app.use("/api", apiroutes);
 app.use("/", htmlroutes);
-app.use("/", apiroutes);
 
 app.listen(PORT, () => {
   console.log(`App running at ${PORT}`);

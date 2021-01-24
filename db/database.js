@@ -17,7 +17,9 @@ class databaseFunctionality {
 
     getNotes(){
         return this.read().then((myNotes) => {
-            let parsedNotes;
+           
+            let jsonNotes = [].concat(JSON.parse(myNotes))
+            return jsonNotes;
         })
     }
 
